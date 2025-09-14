@@ -13,40 +13,46 @@ A Jupyter-based agent that leverages LangChain and OpenAI to perform common data
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/Tchanwangsa/Data-Cleaning-Agent_Workshop-Version.git
-cd Data-Cleaning-Agent_Workshop-Version
+git clone https://github.com/baongo97/Data-Cleaning-Agent.git
+cd Data-Cleaning-Agent
 ```
 
-### Step 2: Create Conda Environment
-
-**Use Anaconda Prompt (Windows) or Terminal (macOS/Linux):**
+### Step 2: Create Python Virtual Environment
 
 ```bash
-# Create and activate environment
-conda create -n data-cleaning-agent python=3.11 -y
-conda activate data-cleaning-agent
+# Create virtual environment
+python -m venv venv
 
-# Install Jupyter and kernel support
-conda install jupyter ipykernel -y
-python -m ipykernel install --user --name data-cleaning-agent --display-name "Data Cleaning Agent"
+# Activate environment
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
 ```
 
-**macOS/Linux:** If you get "conda: command not found", run `conda init` and restart your terminal.
+### Step 3: Install Dependencies
 
-### Step 3: Configure API Key
+With your environment activated, install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4: Configure API Key
 
 Copy the `.env.example` file or run:
 
-**- Windows:** `copy .env.example .env`  
-**- macOS/Linux:** `cp .env.example .env`
+**Windows:** `copy .env.example .env`  
+**macOS/Linux:** `cp .env.example .env`
 
 Edit the `.env` file and add your OpenAI API key:
 
 ```
 OPENAI_API_KEY=your_actual_api_key_here
+PROJECT_ROOT=/path/to/your/project/directory
 ```
 
-### Step 4: Launch Environment
+### Step 5: Launch Environment
 
 **Jupyter Notebook:**
 
@@ -60,17 +66,18 @@ jupyter notebook
 code .
 ```
 
-**Important:** Select the "Data Cleaning Agent" kernel when opening notebooks. (This is the environment we created in part 2)
+**Important:** Always select the "Data Cleaning Agent" kernel when opening notebooks to ensure all dependencies are available.
 
-### Step 5: Install Dependencies
+### Step 6: Verify Installation
 
-Open `main.ipynb` and run the first cell:
+1. Open `main.ipynb` in Jupyter or VS Code
+2. Select the "Data Cleaning Agent" kernel
+3. Run the first few cells to verify all imports work correctly
+4. Test with a sample query to ensure the system is working
 
-```python
-# Install necessary packages
-%pip import-ipynb
-...
-```
+**Troubleshooting:**
+- If you get import errors, make sure you've activated the correct environment
+- If OpenAI API calls fail, verify your API key is correctly set in the `.env` file
 
 ## Current Features
 
@@ -226,6 +233,83 @@ The agent currently supports the following data cleaning features:
 - "Add 1 and 2 period lag features for sales"
 - "Create 7-day rolling average"
 - "Generate quadratic polynomial features"
+
+### ⚖️ Data Standardization (`standardization`)
+**What it does:** Provides comprehensive data standardization and preprocessing capabilities for machine learning preparation including normalization, scaling, categorical encoding, and feature transformation.
+
+**Capabilities:**
+- **Multi-method normalization:** Min-max scaling (0-1), MaxAbs scaling (-1 to 1), and unit vector normalization with missing value handling
+- **Advanced scaling:** Standard scaling (z-score), robust scaling (median/IQR), and quantile transformation for different data distributions
+- **Categorical encoding:** One-hot encoding, label encoding, and binary encoding with automatic cardinality handling and memory optimization
+- **Rare category handling:** Intelligently group low-frequency categories to reduce dimensionality while preserving information
+- **Smart dummy variables:** Create dummy variables with multicollinearity prevention and automatic type optimization
+- **Preprocessing pipelines:** Complete ML preprocessing workflows combining scaling, encoding, and validation steps
+- **Memory-efficient operations:** Optimized transformations with automatic data type management
+
+**Example queries:**
+- "Normalize numeric columns"
+- "Scale features for machine learning"
+- "One-hot encode categorical variables"
+- "Handle rare categories in city column"
+- "Create dummy variables without multicollinearity"
+- "Prepare dataset for machine learning"
+- "Apply robust scaling for outlier-resistant standardization"
+
+### 📤 Export & Formatting Tools (`export_tools`)
+**What it does:** Provides comprehensive export and formatting capabilities for data cleaning results with professional output options and documentation generation.
+
+**Capabilities:**
+- **Multi-format export:** Enhanced export support for CSV, JSON, Parquet, Pickle, and HTML with custom formatting options and encoding control
+- **Professional Excel export:** Excel-optimized output with formatting, borders, auto-width columns, freeze panes, multiple sheets, and styled headers
+- **Data dictionary generation:** Comprehensive data documentation including column types, statistics, quality metrics, and optimization suggestions
+- **Interactive HTML reports:** Detailed summary reports with styled tables, metrics visualization, and data quality insights
+- **Variable codebook creation:** Detailed metadata documentation in both JSON and human-readable text formats with statistical summaries
+- **Quality assessment integration:** Automatic data quality flags, missing value analysis, and optimization recommendations
+- **Memory usage reporting:** File size tracking and memory impact analysis for all export operations
+
+**Example queries:**
+- "Export to Excel with proper formatting"
+- "Create a comprehensive data dictionary"
+- "Generate detailed summary report"
+- "Export to CSV with custom encoding"
+- "Create codebook for documentation"
+- "Export to JSON with indentation"
+- "Save data to multiple Excel sheets"
+
+### 🔍 Advanced Data Profiling (`profiling`)
+**What it does:** Comprehensive data profiling and quality analysis providing deep insights into dataset characteristics, quality metrics, correlations, patterns, and data drift detection.
+
+**Capabilities:**
+- **Comprehensive data profiling:** Detailed statistical analysis including column-by-column profiling with type-specific statistics (numeric: mean, median, quartiles, skewness, kurtosis; categorical: cardinality, top values; datetime: date ranges)
+- **Multi-dimensional quality scoring:** Assessment across 5 quality dimensions:
+  - **Completeness:** Missing data analysis and scoring
+  - **Uniqueness:** Duplicate detection and cardinality analysis
+  - **Consistency:** Data format and type consistency validation
+  - **Validity:** Outlier detection and constraint validation
+  - **Accuracy:** Heuristic-based accuracy assessment
+- **Data drift detection:** Statistical comparison between datasets including:
+  - Schema drift (column changes, type changes)
+  - Statistical drift (mean changes, distribution changes using KS-test and t-test)
+  - Categorical drift (new/removed categories, distribution changes)
+- **Advanced correlation analysis:** 
+  - Pearson, Spearman, and Kendall correlation methods
+  - Multicollinearity detection and grouping
+  - Interactive correlation heatmaps and distribution plots
+- **Pattern detection:** Automatic identification of:
+  - **Text patterns:** Email, phone numbers, URLs, date-like strings, ID formats
+  - **Numeric patterns:** Age-like, year-like, percentage-like, probability-like values
+  - **Categorical patterns:** Binary, low/high cardinality, imbalanced distributions
+  - **Missing data patterns:** Correlated missing values and common missing patterns
+
+**Example queries:**
+- "Generate a comprehensive data profile report"
+- "Calculate data quality metrics"
+- "Check for data drift between datasets"
+- "Analyze correlations in the data"
+- "Detect patterns in the data"
+- "Compare data quality between old and new datasets"
+- "Find multicollinearity issues"
+- "Assess overall data quality score"
 
 ## Adding New Features
 
