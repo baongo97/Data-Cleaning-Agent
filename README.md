@@ -277,7 +277,7 @@ The agent currently supports the following data cleaning features:
 - "Save data to multiple Excel sheets"
 
 ### 🔍 Advanced Data Profiling (`profiling`)
-**What it does:** Comprehensive data profiling and quality analysis providing deep insights into dataset characteristics, quality metrics, correlations, patterns, and data drift detection.
+**What it does:** Comprehensive data profiling and quality analysis providing deep insights into dataset characteristics, quality metrics, correlations, and patterns.
 
 **Capabilities:**
 - **Comprehensive data profiling:** Detailed statistical analysis including column-by-column profiling with type-specific statistics (numeric: mean, median, quartiles, skewness, kurtosis; categorical: cardinality, top values; datetime: date ranges)
@@ -287,10 +287,6 @@ The agent currently supports the following data cleaning features:
   - **Consistency:** Data format and type consistency validation
   - **Validity:** Outlier detection and constraint validation
   - **Accuracy:** Heuristic-based accuracy assessment
-- **Data drift detection:** Statistical comparison between datasets including:
-  - Schema drift (column changes, type changes)
-  - Statistical drift (mean changes, distribution changes using KS-test and t-test)
-  - Categorical drift (new/removed categories, distribution changes)
 - **Advanced correlation analysis:** 
   - Pearson, Spearman, and Kendall correlation methods
   - Multicollinearity detection and grouping
@@ -304,10 +300,8 @@ The agent currently supports the following data cleaning features:
 **Example queries:**
 - "Generate a comprehensive data profile report"
 - "Calculate data quality metrics"
-- "Check for data drift between datasets"
 - "Analyze correlations in the data"
 - "Detect patterns in the data"
-- "Compare data quality between old and new datasets"
 - "Find multicollinearity issues"
 - "Assess overall data quality score"
 
